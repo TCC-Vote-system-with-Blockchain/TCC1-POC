@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './style.css';
 import { getPictures } from '../../utils/getPictures';
+import './style.css';
 
 export const AddCandidatePage = () => {
     const [candidateName, setCandidateName] = useState('');
@@ -17,8 +17,6 @@ export const AddCandidatePage = () => {
         setdisplayCandidateName(candidateName);
         setCandidatePicture(getPictures());
 
-        if(candidateName === 'Eduardo') setRequestMessage('successful');
-        else setRequestMessage('denied')
         // try {
         //   const accounts = await web3.eth.getAccounts();
         //   await voteSystem.methods.adicionarCandidato(nomeCandidato).send({ from: accounts[0] });
@@ -27,7 +25,7 @@ export const AddCandidatePage = () => {
         //   alert('Ocorreu um erro ao adicionar o candidato.');
         //   console.error(error);
         // }
-      }
+    }
 
     return(
         <div className='vote-page-container' data-testid="VotePage">
@@ -56,5 +54,5 @@ export const AddCandidatePage = () => {
                 </div>
             </div>
         </div>
-    );5
+    );
 };
