@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { getPictures } from '../../utils/getPictures';
+import { getAbi } from '../../utils/getAbi';
+import { AbiItem } from 'web3-utils';
+import Web3 from 'web3';
 import './style.css';
 
 export const AddCandidatePage = () => {
@@ -7,7 +10,11 @@ export const AddCandidatePage = () => {
     const [displayCandidateName, setdisplayCandidateName] = useState('');
     const [candidatePicture, setCandidatePicture] = useState('');
     const [requestMessage, setRequestMessage] = useState('');
+    const web3 = new Web3('http://localhost:7545'); // Conexão com o nó da Ethereum
+    const contractAddress = '0x09a5206FAAC5A9D08c2A25f49B9D44493eD20863'; // Endereço do contrato na blockchain
+    const voteSystem = new web3.eth.Contract(getAbi() as AbiItem[], contractAddress); // Objeto do contrato
     
+
     function handleCandidateNameChange(event: React.ChangeEvent<HTMLInputElement>) {
         setCandidateName(event.target.value);
     }
@@ -16,15 +23,15 @@ export const AddCandidatePage = () => {
         event.preventDefault();
         setdisplayCandidateName(candidateName);
         setCandidatePicture(getPictures());
-
-        // try {
-        //   const accounts = await web3.eth.getAccounts();
-        //   await voteSystem.methods.adicionarCandidato(nomeCandidato).send({ from: accounts[0] });
-        //   alert('Candidato adicionado com sucesso!');
-        // } catch (error) {
-        //   alert('Ocorreu um erro ao adicionar o candidato.');
-        //   console.error(error);
-        // }
+        
+        try {
+          const accounts = await web3.eth.getAccounts();
+          await voteSystem.methods.adicionarCandidato(candidateName).send({ from: accounts[0] });
+          setRequestMessage('successful')
+        } catch (error) {
+          setRequestMessage('denied');
+          console.error(error);
+        }
     }
 
     return(
