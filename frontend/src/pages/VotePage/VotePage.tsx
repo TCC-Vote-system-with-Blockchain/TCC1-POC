@@ -11,7 +11,7 @@ export const VotePage = () => {
     const [candidatePicture, setCandidatePicture] = useState('');
     const [requestMessage, setRequestMessage] = useState('');
     const web3 = new Web3('http://localhost:7545'); // Conexão com o nó da Ethereum
-    const contractAddress = '0xcC80D5C885E59f956402608aBD89049E0f936d82'; // Endereço do contrato na blockchain
+    const contractAddress = '0xCa6acB25Fb927c4Bb613B4364d1d5d5a3CD8745C'; // Endereço do contrato na blockchain
     const voteSystem = new web3.eth.Contract(getAbi() as AbiItem[], contractAddress); // Objeto do contrato
     
 

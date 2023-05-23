@@ -7,16 +7,20 @@ import './style.css';
 
 export const AddCandidatePage = () => {
     const [candidateName, setCandidateName] = useState('');
+    const [candidateNumber, setCandidateNumber] = useState('');
     const [displayCandidateName, setdisplayCandidateName] = useState('');
     const [candidatePicture, setCandidatePicture] = useState('');
     const [requestMessage, setRequestMessage] = useState('');
     const web3 = new Web3('http://localhost:7545'); // Conexão com o nó da Ethereum
-    const contractAddress = '0x09a5206FAAC5A9D08c2A25f49B9D44493eD20863'; // Endereço do contrato na blockchain
+    const contractAddress = '0xCa6acB25Fb927c4Bb613B4364d1d5d5a3CD8745C'; // Endereço do contrato na blockchain
     const voteSystem = new web3.eth.Contract(getAbi() as AbiItem[], contractAddress); // Objeto do contrato
     
 
     function handleCandidateNameChange(event: React.ChangeEvent<HTMLInputElement>) {
         setCandidateName(event.target.value);
+    }
+    function handleCandidateNumberChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setCandidateNumber(event.target.value);
     }
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -26,7 +30,7 @@ export const AddCandidatePage = () => {
         
         try {
           const accounts = await web3.eth.getAccounts();
-          await voteSystem.methods.adicionarCandidato(candidateName).send({ from: accounts[0] });
+          await voteSystem.methods.adicionarCandidato(candidateName, candidateNumber).send({ from: "0x0a5eF19528F6b9a40b21a27A560B75ec39673007" });
           setRequestMessage('successful')
         } catch (error) {
           setRequestMessage('denied');
@@ -56,6 +60,8 @@ export const AddCandidatePage = () => {
                     <form onSubmit={handleSubmit} className='input-cadidate-name'>
                         <label> Nome do Candidato: </label>
                         <input id='nome' type="text" value={candidateName} onChange={handleCandidateNameChange} style={{width:'70%'}}/>
+                        <label> numero do Candidato: </label>
+                        <input id='numero' type="number" value={candidateNumber} onChange={handleCandidateNumberChange} style={{width:'70%'}}/>
                         <button type="submit" style={{width:'70%'}} disabled={!candidateName}> Adicionar Candidato </button>
                     </form>
                 </div>
