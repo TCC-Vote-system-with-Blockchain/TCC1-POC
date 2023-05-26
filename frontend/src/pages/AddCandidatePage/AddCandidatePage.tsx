@@ -61,7 +61,7 @@ export const AddCandidatePage = () => {
                     <form onSubmit={handleSubmit} className='input-cadidate-name'>
                         <label> Nome do Candidato: </label>
                         <input id='nome' type="text" value={candidateName} onChange={handleCandidateNameChange} style={{width:'70%'}}/>
-                        <label> numero do Candidato: </label>
+                        <label> Número do Candidato: </label>
                         <input id='numero' type="number" value={candidateNumber} onChange={handleCandidateNumberChange} style={{width:'70%'}}/>
                         <button type="submit" style={{width:'70%'}} disabled={!candidateName}> Adicionar Candidato </button>
                     </form>
