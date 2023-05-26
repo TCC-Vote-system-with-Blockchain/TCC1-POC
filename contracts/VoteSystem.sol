@@ -27,7 +27,7 @@ contract VoteSystem is Ownable{
         
         for (uint256 i = 0; i < candidatos.length; i++) {
             if (candidatos[i].numero == _numero) {
-                revert("numero ja cadastrado!");
+                revert("Numero ja cadastrado!");
             }
         }
         Candidato memory candidato = Candidato(_nome, _numero, 0); 

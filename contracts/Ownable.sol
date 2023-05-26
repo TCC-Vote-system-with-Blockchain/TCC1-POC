@@ -34,7 +34,7 @@ contract Ownable {
   * @dev Throws if called by any account other than the owner.
   */
   modifier onlyOwner() {
-    require(isOwner(), "nao possui permissao para isso!");
+    require(isOwner(), "Nao possui permissao para adicionar um candidato!");
     _;
   }
 
