@@ -4,6 +4,7 @@ import { getAbi } from '../../utils/getAbi';
 import { AbiItem } from 'web3-utils';
 import Web3 from 'web3';
 import './style.css';
+import { getContractAddress } from '../../utils/getContractAddress';
 
 export const VotePage = () => {
     const [vote, setVote] = useState('');
@@ -11,7 +12,7 @@ export const VotePage = () => {
     const [candidatePicture, setCandidatePicture] = useState('');
     const [requestMessage, setRequestMessage] = useState('');
     const web3 = new Web3('http://localhost:7545'); // Conexão com o nó da Ethereum
-    const contractAddress = '0xCa6acB25Fb927c4Bb613B4364d1d5d5a3CD8745C'; // Endereço do contrato na blockchain
+    const contractAddress = getContractAddress(); // Endereço do contrato na blockchain
     const voteSystem = new web3.eth.Contract(getAbi() as AbiItem[], contractAddress); // Objeto do contrato
     
 

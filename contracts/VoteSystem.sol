@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract VoteSystem {
+import "./Ownable.sol";
+
+contract VoteSystem is Ownable{
     
     // Evento para notificar quando um voto for registrado
     event VotoRegistrado(uint256 candidatoId);
@@ -21,7 +23,7 @@ contract VoteSystem {
     Candidato[] public candidatos;
 
     // Função para adicionar um novo candidato
-    function adicionarCandidato(string memory _nome, uint256 _numero) public {
+    function adicionarCandidato(string memory _nome, uint256 _numero) public onlyOwner {
         
         for (uint256 i = 0; i < candidatos.length; i++) {
             if (candidatos[i].numero == _numero) {
